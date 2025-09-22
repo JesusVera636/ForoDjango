@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+    <head>
+        {% load static %}
+        <link rel="stylesheet" href="{% static 'foro/css/bootstrap/bootstrap.css'%}"/>
+        <link rel="stylesheet" href="{% static 'foro/css/style.css'%}"/>
+
+        <script src="{% static 'foro/js/jquery-3.7.1.min.js' %}"></script>
+    </head>
+
+    <body>
+        <div class="grid-container">
+
+            <div class="d-header">
+                <div>
+                    Fororo mororo - Iniciar Sesion
+                </div>
+            </div>
+
+            <div class="d-menu">
+                <ul>
+                    <a href="{% url 'home' %}"><li>Volver al Home</li></a>
+                    <a href="{% url 'register' %}"><li>Crear Cuenta</li></a>
+                </ul>
+            </div>
+
+            <div class="d-main">
+                <form class="form-with-validation" method="post" action="" id="formulario">
+                    {% csrf_token %}
+                    <div class="col-lg-6">
+                        <label class="form-label">Nombre de Usuario:</label>
+                        {{form.username}}
+                    </div>
+                    <div class="col-lg-6">
+                        <label class="form-label">Contraseña: </label>
+                        {{form.password}}
+                    </div>
+                
+                    <input type="submit" class="btn btn-primary" id="enviar" value="Iniciar Sesion">
+
+                    <script type="text/javascript">
+                    $(document).ready(function () {
+                        $(".alert").hide();
+                    });
+                    </script>
+                    <div id="error" class="alert alert-danger" role="alert">
+                        {{ error }}
+                    </div>
+                    
+                    
+
+                </form>
+                <div id="alert-box" class="alert alert-success" role="alert">
+                    {{mensaje}}
+                </div>
+            </div>
+            
+
+            <div class="d-footer">
+                <div>
+                    
+                </div>
+            </div>
+
+        </div>
+            
+    </body>
+
+    <footer>
+
+
+
+    </footer>
+</html>

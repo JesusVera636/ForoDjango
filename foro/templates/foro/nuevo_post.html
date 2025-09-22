@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+    <head>
+        {% load static %}
+        <link rel="stylesheet" href="{% static 'foro/css/bootstrap/bootstrap.css'%}"/>
+        <link rel="stylesheet" href="{% static 'foro/css/style.css' %}"/>
+        <title>foro</title>
+        <meta charset="UTF-8">
+        <script src="{% static 'foro/js/jquery-3.7.1.min.js' %}"></script>
+    </head>
+    <body>
+        <div class="grid-container">
+
+            <div class="d-header">
+                <div>
+                    Fororo mororo - {{user.username}}
+                </div>
+            </div>
+
+            <div class="d-menu">
+                <ul>
+                    <a href="{% url 'home' %}"><li>Volver al Home</li></a>
+                    <a href="{% url 'cerrar_sesion' %}"><li>Cerrar Sesion</li></a>
+                </ul>
+            </div>
+
+            <div class="d-main">
+                <div class="d-main">
+                <form method="post" action="" id="formulario">
+                    {% csrf_token %}
+                    <div class="col-lg-6">
+                        <label class="form-label">{{form.tituloHilo.label_tag}}</label>
+                        {{form.tituloHilo}}
+                    </div>
+                    <div class="row-cols-1">
+                        <label class="form-label">{{form.cuerpoHilo.label_tag}}</label>
+                        {{form.cuerpoHilo}}
+                    </div>
+                    <input type="text" value="{{user.pk}}" name="autorHilo" hidden>
+                    <input type="text" value="0" name="puntosHilo" hidden>
+                
+                    <input type="submit" class="btn btn-primary" id="enviar" value="Crear Hilo">
+                    <input type="reset" class="btn btn-danger" id="limpiar" value="Limpiar">
+
+                    <div id="error" class="alert alert-danger" role="alert">
+                        {{ error }}
+                    </div>
+
+                </form>
+                <div id="alert-box" class="alert alert-success" role="alert">
+                    {{ mensaje }}
+                </div>
+            </div>
+                
+
+            </div>
+
+            <div class="d-footer">
+                <div>
+                    
+                </div>
+            </div>
+
+        </div>
+
+    </body>
+    <footer>
+        
+    </footer>
+</html>

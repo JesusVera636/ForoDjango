@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+    <head>
+        {% load static %}
+        <link rel="stylesheet" href="{% static 'foro/css/bootstrap/bootstrap.css'%}"/>
+        <link rel="stylesheet" href="{% static 'foro/css/style.css' %}"/>
+        <title>foro</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+        <script src="{% static 'foro/js/jquery-3.7.1.min.js' %}"></script>
+    </head>
+    <body>
+        <div class="grid-container">
+
+            <div class="d-header">
+                <div>
+                    Fororo mororo - {{user.username}}
+                </div>
+            </div>
+
+            <div class="d-menu">
+                <ul>
+                    {% if user.is_authenticated %}
+                    <a href="{% url 'cerrar_sesion' %}"><li>Cerrar Sesion</li></a>
+                    <a href="{% url 'nuevo_post' %}"><li>Crear Hilo</li></a>
+                    {% else %}
+                    <a href="{% url 'register' %}"><li>Crear Cuenta</li></a>
+                    <a href="{% url 'login' %}"><li>Iniciar Sesion</li></a>
+                    {% endif %}
+                </ul>
+            </div>
+
+            <div class="d-main">
+
+                {% for post in posts %}
+                <a href="{% url 'post' post.idHilo %}">
+                <section class="post--00">
+                    <h1>{{ post.tituloHilo }}</h1>
+                    <p>{{ post.cuerpoHilo }}</p>
+                </section>
+                </a>
+                {% endfor %}
+
+            </div>
+
+            <a href="{% url 'post' postDia.idHilo %}">
+            <div class="d-right">
+                <div>
+                    Hilo del Dia
+                </div>
+                <div class="d-img">
+                    <h2>{{postDia.tituloHilo}}</h1>
+                    <p>{{postDia.cuerpoHilo}}</p>
+                </div>
+                
+            </div>
+            </a>
+
+            <div class="d-footer">
+                <div>
+                    
+                </div>
+            </div>
+
+        </div>
+
+    </body>
+    <footer>
+        
+    </footer>
+</html>

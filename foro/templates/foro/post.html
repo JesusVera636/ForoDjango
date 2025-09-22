@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+    <head>
+        {% load static %}
+        <link rel="stylesheet" href="{% static 'foro/css/bootstrap/bootstrap.css'%}"/>
+        <link rel="stylesheet" href="{% static 'foro/css/style.css' %}"/>
+        <title>foro</title>
+        <meta charset="UTF-8">
+        <script src="{% static 'foro/js/jquery-3.7.1.min.js' %}"></script>
+    </head>
+    <body>
+        <div class="grid-container">
+
+            <div class="d-header">
+                <div>
+                    Fororo mororo - {{user.username}}
+                </div>
+            </div>
+
+            <div class="d-menu">
+                <ul>
+                    <a href="{% url 'home' %}"><li>Volver al Home</li></a>
+                    <a href="{% url 'cerrar_sesion' %}"><li>Cerrar Sesion</li></a>
+
+                    {% if perms.foro.delete_hilo or user.pk == post.autorHilo.pk %}
+                    <a href="{% url 'borrar_post' post.idHilo %}"><li>Borrar Post</li></a>
+                    {% endif %}
+                </ul>
+            </div>
+
+            <div class="d-main">
+                <section>
+                    <h1>{{post.tituloHilo}}</h1>
+                    <p>{{post.cuerpoHilo}}</p>
+                </section>
+                <div class="puntacion">
+                    <a href="{% url 'puntuacion' post.idHilo 'mas' %}">
+                    <img src="{%static 'foro/img/like.png'%}" height="40px" style="float: left;">
+                    </a>
+                    <p style="float: left;">{{post.puntosHilo}}</p>
+                    <a href="{% url 'puntuacion' post.idHilo 'menos' %}">
+                    <img src="{%static 'foro/img/dislike.png'%}" height="40px" style="float: left;">
+                    </a>
+                </div>
+                <p style="float: right;">Autor: {{post.autorHilo}}</p><br><br><br>
+                <h2>Comentarios</h2>
+                {% for comm in comentarios %}
+
+                <section>{{comm.cuerpoComentario}}</section>
+
+                {% endfor %}
+                <form method="post" action="" id="formulario">
+                    {% csrf_token %}
+                    <div class="col-lg-6">
+                        <label class="form-label">Agregar un Comentario:</label>
+                        {{form.cuerpoComentario}}
+                    </div>
+                    <input type="text" value="{{user.pk}}" name="autorComentario" hidden>
+                    <input type="text" value="{{post.idHilo}}" name="padreComentario" hidden>
+
+                    <input type="submit" class="btn btn-primary" id="enviar" value="Añadir Comentario" style="margin-top: 15px;">
+                </form>
+            </div>
+
+            <div class="d-footer">
+                
+            </div>
+
+        </div>
+
+    </body>
+    <footer>
+        
+    </footer>
+</html>
