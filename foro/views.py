@@ -4,6 +4,7 @@ from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login as auth_login
 from django.contrib.auth import logout
+from .models import Hilo
 from django.db.models import Max
 from .forms import *
 
@@ -18,6 +19,9 @@ def home(request):
         'postDia': postDia
     }
     return render(request, 'foro/home.html', datos)
+
+def top_peliculas(request):
+    return render(request, 'foro/top_peliculas.html')
 
 @login_required(login_url='login')
 def post(request, id):
@@ -39,7 +43,7 @@ def post(request, id):
 
     return render(request, 'foro/post.html', datos)
 
-def login(request):
+def fLogin(request):
     if request.method == 'POST':
         form = AuthenticationForm(data=request.POST)
 

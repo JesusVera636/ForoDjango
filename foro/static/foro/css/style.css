@@ -102,6 +102,13 @@ body {
   margin-left: 40px;
 }
 
+.poster {
+  max-width: 300px;
+  max-height: 450px;
+  margin-left: 10px;
+  margin-top: 10px;
+}
+
 section {
   border: 2px solid seagreen;
   margin-bottom: 10px;

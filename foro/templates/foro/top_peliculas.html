@@ -7,6 +7,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
         <script src="{% static 'foro/js/jquery-3.7.1.min.js' %}"></script>
+        <script src="{% static 'foro/js/tmdb.js' %}"></script>
     </head>
     <body>
         <div class="grid-container">
@@ -19,7 +20,7 @@
 
             <div class="d-menu">
                 <ul>
-                    <a href="{% url 'top_peliculas' %}"><li>Top Peliculas 2025</li></a>
+                    <a href="{% url 'home' %}"><li>Volver al Home</li></a>
                     {% if user.is_authenticated %}
                     <a href="{% url 'cerrar_sesion' %}"><li>Cerrar Sesion</li></a>
                     <a href="{% url 'nuevo_post' %}"><li>Crear Hilo</li></a>
@@ -31,30 +32,9 @@
             </div>
 
             <div class="d-main">
-
-                {% for post in posts %}
-                <a href="{% url 'post' post.idHilo %}">
-                <section class="post--00">
-                    <h1>{{ post.tituloHilo }}</h1>
-                    <p>{{ post.cuerpoHilo }}</p>
-                </section>
-                </a>
-                {% endfor %}
-
-            </div>
-
-            <a href="{% url 'post' postDia.idHilo %}">
-            <div class="d-right">
-                <div>
-                    Hilo del Dia
+                <div class="row" id="pelis">
                 </div>
-                <div class="d-img">
-                    <h2>{{postDia.tituloHilo}}</h1>
-                    <p>{{postDia.cuerpoHilo}}</p>
-                </div>
-                
             </div>
-            </a>
 
             <div class="d-footer">
                 
